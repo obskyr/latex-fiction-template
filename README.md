@@ -1,6 +1,10 @@
 # Want to Write Your Novel in LaTeX?
 
-An utterly deranged\* decision. So did I. This repository contains a **template
+An utterly deranged\* decision.
+
+So did I.
+
+This repository contains a **template
 for writing fiction in LaTeX** (and Markdown!)**, compiling to both PDF and
 e-reader-ready EPUB formats,** something for which a whole heap of boilerplate
 is required. It sets a reasonable default style, and aims to be customizable.
@@ -22,7 +26,7 @@ In preparation, you will need:
   extension for VS Code is useful for checking spelling and grammar.
 * An installation of LaTeX, specifically **LuaTeX.** There are several LaTeX
   distributions, but the main players are **[MiKTeX](https://miktex.org/)**
-  and [TeX Live](https://www.tug.org/texlive/). The former is smaller but
+  and **[TeX Live](https://www.tug.org/texlive/).** The former is smaller but
   more fussy, while the latter is enormous but has… *everything* included.
 * An installation of **Perl.** You may already have it installed – run `perl
   -v` to check. If you’re on Windows, I recommend
@@ -45,6 +49,40 @@ whether you want to build a PDF or an EPUB. The resulting file will be output
 as `book.pdf` or `book.epub`, respectively.
 
 
+### Customization
+
+You’ll likely want to configure various metadata and typographical options.
+They can be added and edited primarily in these places:
+
+* **`customization/preamble.tex`** contains all the LaTeX code that will appear
+  before the document in every LaTeX file. Here’s where you add packages,
+  change options, and generally write LaTeX code.
+* **`customization/xhtml.cfg`** contains the [TeX4Ht configuration](https://www.kodymirus.cz/tex4ht-doc/Configurations.html#configurations2) –
+  i.e. the configuration for EPUB output. Among other things,
+  it lets you style chapter headings, set metadata, and add fonts.
+* **`customization/xhtml.css`** lets you style the EPUB using CSS.
+* Replace **`Images/cover.jpeg`** to set the cover image for the book.
+
+The `code/` directory belongs to code inherent to the template – you likely
+won’t have to look in there unless you want to contribute to this repository.
+
+
+## Minutiæ
+
+This template makes some minor typographical decisions – it assumes that you
+won’t want linebreaks before en and em dashes, for one, and it sets em dashes
+surrounded by two hair spaces (“a&hairsp;&NoBreak;—&hairsp;b” instead of
+“a—b”).
+
+What it does *not* do is automate “smart” typography. For [deeply nerdy
+reasons,](https://tex.stackexchange.com/a/126315/392788) this template
+delegates that to you, the typist: You’ll have to decide if you want to use
+spaced en dashes, em dashes, smart quotes, dumb quotes, or what have you.
+My suggestion for typing these is a *compose key* (on Windows, that’s
+[WinCompose](https://github.com/samhocevar/wincompose)), but of course, you
+can also use LaTeX or Babel graphemes such as ` `` `, `''`, `--`, and `---`.
+
+
 ## Contributions
 
 This template can certainly be made better, more user-friendly, and more
@@ -53,6 +91,12 @@ apex-nerd writers? Feel free to submit issues and pull requests to this repo!
 Typographical improvements, accessibility improvements, features, and
 ease-of-use improvements are all welcome.
 
-At the moment, it’s made for a build
-flow centered around VS Code, but that’s just because it happens to be what I
-use – if you want to add support for alternative tooling, be my guest.
+At the moment, it’s made for a build flow centered around VS Code, but that’s
+only because it happens to be what I use – if you want to add support for
+alternative tooling, be my guest!
+
+
+---
+
+Go forth, and write righteously and egregiously.  
+—&hairsp;&NoBreak;Molly
