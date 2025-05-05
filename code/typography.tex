@@ -1,0 +1,39 @@
+% This file contains typography tweaks to ensure that everything works as
+% expected in textual e-book form as well as in PDF form.
+% It does, however, make some opinionated decision, such as that em dashes
+% should be set surrounded by hair spaces. You can modify this file to
+% change that.
+
+
+% Ensure that hair spaces work.
+\iftexforht {} {
+    \newunicodechar { } {%
+        \iffontchar\font `^^^^200a {%
+            ^^^^200a%
+        }\else{%
+            durky\hspace{1pt}%
+        }\fi%
+    }
+}
+
+
+% Ensure that en spaces work.
+\iftexforht {
+    \renewcommand {\enspace} {^^^^2002}
+} {
+    \newunicodechar { } {%
+        \iffontchar\font `^^^^2002 {%
+            ^^^^2002%
+        }\else{%
+            \enspace%
+        }\fi%
+    }
+}
+
+
+% Prevent breaking before en dashes.
+\newunicodechar{–}{\unskip~--\space\ignorespaces}
+
+
+% Prevent breaking before em dashes (and add in hair spaces).
+\newunicodechar{—}{\ifvmode{}\else{\unskip }\fi^^^^2060—\IfNextSpace{\enspace\ignorespaces}{ }}

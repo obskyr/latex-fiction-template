@@ -3,9 +3,17 @@
 
     "ltex.enabled": ["latex", "markdown_latex_combined"],
     "ltex.diagnosticSeverity": "hint",
+
+    "files.associations": {
+        "*.cfg": "latex"
+    },
     
     "latex-workshop.latex.recipe.default": "Make PDF",
-    "latex-workshop.latex.outDir": "%WORKSPACE_FOLDER%/build/",
+    "latex-workshop.latex.outDir": "%WORKSPACE_FOLDER%/build/%RELATIVE_DIR%/",
+    "latex-workshop.latex.search.rootFiles.exclude": [
+        "/code/**/*",
+        "/customization/**/*"
+    ],
     "latex-workshop.latex.recipes": [
         {
             "name": "Make PDF",
@@ -34,7 +42,9 @@
                 "-outdir=%OUTDIR%",
                 "%DOC%"
             ],
-            "env": {}
+            "env": {
+                "TEXMF_OUTPUT_DIRECTORY": "%OUTDIR%"
+            }
         },
         {
             "name": "tex4ebook",
@@ -46,7 +56,10 @@
                 "--output-dir", "%OUTDIR%",
                 "--format", "epub",
                 "%DOC%"
-            ]
+            ],
+            "env": {
+                "TEXMF_OUTPUT_DIRECTORY": "%OUTDIR%"
+            }
         },
         {
             "name": "Move PDF",

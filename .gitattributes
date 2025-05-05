@@ -1,0 +1,8 @@
+.gitattributes text
+.gitignore text
+
+*.tex text diff=latex
+*.cfg text diff=latex
+*.css text diff=css
+*.json text diff=json
+*.txt text
