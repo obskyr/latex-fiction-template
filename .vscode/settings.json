@@ -1,0 +1,68 @@
+{
+    // "ltex.language": "en-US",
+
+    "ltex.enabled": ["latex", "markdown_latex_combined"],
+    "ltex.diagnosticSeverity": "hint",
+    
+    "latex-workshop.latex.recipe.default": "Make PDF",
+    "latex-workshop.latex.outDir": "%WORKSPACE_FOLDER%/build/",
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "Make PDF",
+            "tools": [
+                "latexmk (lualatex)",
+                "Move PDF"
+            ]
+        },
+        {
+            "name": "Make EPUB",
+            "tools": [
+                "tex4ebook",
+                "Move EPUB"
+            ]
+        }
+    ],
+    "latex-workshop.latex.tools": [
+        {
+            "name": "latexmk (lualatex)",
+            "command": "latexmk",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-lualatex",
+                "-outdir=%OUTDIR%",
+                "%DOC%"
+            ],
+            "env": {}
+        },
+        {
+            "name": "tex4ebook",
+            "command": "tex4ebook",
+            "args": [
+                "--lua",
+                "--config", "%WORKSPACE_FOLDER%/customization/xhtml.cfg",
+                "--build-dir", "%OUTDIR%",
+                "--output-dir", "%OUTDIR%",
+                "--format", "epub",
+                "%DOC%"
+            ]
+        },
+        {
+            "name": "Move PDF",
+            "command": "mv",
+            "args": [
+                "%OUTDIR%/%DOCFILE%.pdf",
+                "%WORKSPACE_FOLDER%/%RELATIVE_DIR%/"
+            ]
+        },
+        {
+            "name": "Move EPUB",
+            "command": "mv",
+            "args": [
+                "%OUTDIR%/%DOCFILE%.epub",
+                "%WORKSPACE_FOLDER%/%RELATIVE_DIR%/"
+            ]
+        }
+    ]
+}

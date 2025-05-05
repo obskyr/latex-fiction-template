@@ -1,0 +1,18 @@
+[
+    {
+        "key": "ctrl+shift+B",
+        "command": "editor.action.insertSnippet",
+        "when": "editorTextFocus",
+        "args": {
+            "snippet": "\\textbf{${TM_SELECTED_TEXT}}$0"
+        }
+    },
+    {
+        "key": "ctrl+shift+I",
+        "command": "editor.action.insertSnippet",
+        "when": "editorTextFocus && editorLangId == latex",  // chained clause
+        "args": {
+            "snippet": "\\textit{${TM_SELECTED_TEXT}}$0"
+        }
+    }
+]

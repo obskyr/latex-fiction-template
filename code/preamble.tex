@@ -1,0 +1,71 @@
+\usepackage[english]{babel}
+\usepackage{currfile}
+\usepackage[paperheight=197mm,paperwidth=130mm,margin=2cm,heightrounded]{geometry}
+\usepackage{ifnextok}
+\def\markdownOptionOutputDir{build}
+\usepackage[hybrid]{markdown}
+\usepackage{needspace}
+\usepackage{newunicodechar}
+\usepackage[asterism]{sectionbreak}
+\usepackage{setspace}
+
+
+% == Utility Commands ==
+
+\makeatletter
+\ifdefined\HCode
+   \let\iftexforht\@firstoftwo
+\else
+   \let\iftexforht\@secondoftwo
+\fi
+\makeatother
+
+
+% == Typography ==
+
+% Ensure that hair spaces work.
+\iftexforht {} {
+    \newunicodechar { } {%
+        \iffontchar\font `^^^^200a {%
+            ^^^^200a%
+        }\else{%
+            durky\hspace{1pt}%
+        }\fi%
+    }
+}
+
+% Ensure that en spaces work.
+\iftexforht {
+    \renewcommand {\enspace} {^^^^2002}
+} {
+    \newunicodechar { } {%
+        \iffontchar\font `^^^^2002 {%
+            ^^^^2002%
+        }\else{%
+            \enspace%
+        }\fi%
+    }
+}
+
+% Prevent breaking before en dashes.
+\newunicodechar{–}{\unskip~--\space\ignorespaces}
+
+% Prevent breaking before em dashes (and add in hair spaces).
+\newunicodechar{—}{\ifvmode{}\else{\unskip }\fi^^^^2060—\IfNextSpace{\enspace\ignorespaces}{ }}
+
+
+% == Text Commands ==
+
+% Dialogue command.
+
+\newcommand{\s}[1]{\ifvmode{}\else{\par}\fi—#1}
+
+
+% == Settings ==
+
+\usepackage{ebgaramond}
+\parskip=0.5mm
+
+\title{The Third Winter\protect\\ I Convinced Myself to Love}
+\author{Molly Messner}
+\date{\begin{spacing}{1.2} April 2024\protect\\Translated from Swedish in May 2025 \end{spacing}}
