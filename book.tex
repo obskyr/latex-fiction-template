@@ -9,19 +9,15 @@
 \begin{document}
 
 \iftexforht {%
-    % \ifOption {CoverMimeType} {%
-        \coverimage[natwidth=\paperwidth,natheight=\paperheight,alt={Cover}]{Images/cover.jpeg}%
-    % } {}%
-} {}
+    \IfFileExists{./Images/cover.jpeg}{%
+        \coverimage[natwidth=\paperwidth,natheight=\paperheight,alt={Cover}]{./Images/cover.jpeg}%
+    }{}%
+}{}
 
 
 % Add your source files here.
 
-\subfile{Book/00.0.1 - Colophon}
-\subfile{Book/00.0.2 - Title}
-\subfile{Book/00.0.3 - Table of Contents}
-\subfile{Book/00.1 - Introduction}
-\subfile{Book/01 - The Machine}
+\subfile{Book/01}
 
 
 \end{document}
