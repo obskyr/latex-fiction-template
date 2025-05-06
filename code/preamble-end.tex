@@ -1,0 +1,22 @@
+% This is a preamble shared between all files – specifically, the parts needed
+% for the brass-tacks template to function. It will be the last thing executed
+% in the preamble, after user code in `customization/preamble.tex`.
+
+% === Hacks and Workarounds ===
+
+% This works around an issue when using the Markdown package, which makes it
+% so that filenames can’t contain spaces.
+% https://github.com/Witiko/markdown/issues/568
+\ifdefined\markdownSetup
+    \ifdefined\StrDel
+    \else
+        \usepackage{xstring}
+    \fi
+
+    \StrDel{\jobname}{"}[\jobnameSansQuotes]
+    \typeout{“\jobnameSansQuotes” wow mama}
+    \markdownSetup{
+        inputTempFileName = \jobnameSansQuotes.markdown.in,
+        cacheDir = \markdownOptionOutputDir / _markdown_\jobnameSansQuotes
+    }
+\fi
