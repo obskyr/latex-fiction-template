@@ -12,7 +12,7 @@
     "latex-workshop.latex.outDir": "%WORKSPACE_FOLDER%/build/%RELATIVE_DIR%/",
     "latex-workshop.latex.search.rootFiles.exclude": [
         "/code/**/*",
-        "/customization/**/*"
+        "/configuration/**/*"
     ],
     "latex-workshop.latex.recipes": [
         {
@@ -51,7 +51,7 @@
             "command": "tex4ebook",
             "args": [
                 "--lua",
-                "--config", "%WORKSPACE_FOLDER%/customization/xhtml-config.cfg",
+                "--config", "%WORKSPACE_FOLDER%/configuration/xhtml-config.cfg",
                 "--build-dir", "%OUTDIR%",
                 "--output-dir", "%OUTDIR%",
                 "--format", "epub",
