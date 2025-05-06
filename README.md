@@ -57,17 +57,22 @@ They can be added and edited primarily in these places:
 * **`customization/preamble.tex`** contains all the LaTeX code that will appear
   before the document in every LaTeX file. Here’s where you add packages,
   change options, style the PDF, and generally write LaTeX code.
-* **`customization/xhtml.cfg`** contains the [TeX4Ht configuration](https://www.kodymirus.cz/tex4ht-doc/Configurations.html#configurations2) –
+* **`customization/xhtml-config.cfg`** contains the [TeX4Ht configuration](https://www.kodymirus.cz/tex4ht-doc/Configurations.html#configurations2) –
   i.e. the configuration for EPUB output. Among other things, it lets you
-  style chapter headings, set metadata, and add fonts.
-* **`customization/xhtml.css`** lets you style the EPUB using CSS.
+  set metadata (title, contributors, ISBN…) and add fonts.
+* **`customization/xhtml-code.cfg`** contains more TeX4Ht configuration, but is
+  intended to contain the more technical side of things – custom HTML code
+  certain LaTeX elements are translated into, for example.
+* **`customization/xhtml-style.css`** lets you style the EPUB using CSS.
 * Replace **`Images/cover.jpeg`** to set the cover image for the book.
 * Out of the box, this template is set to use American English. To change this,
   change the line `\usepackage[USenglish]{babel}` in
-  **`customization/preamble.tex`**, and the line `"ltex.language": "en-US",`
-  in **`.vscode/settings.json`**. For example, to switch to British English, change
-  them to `\usepackage[UKenglish]{babel}` and `"ltex.language": "en-GB",`
-  respectively.
+  **`customization/preamble.tex`**, the line `"ltex.language": "en-US",`
+  in **`.vscode/settings.json`**, and the line
+  `\Configure{DocumentLanguage}{en-US}` in `customization/xhtml-config.cfg`.
+  For example, to switch to British English, change them to
+  `\usepackage[UKenglish]{babel}`, `"ltex.language": "en-GB",`, and
+  `\Configure{DocumentLanguage}{en-GB}` respectively.
 
 Note that the styles of the PDF version and the EPUB version are almost
 entirely separate – think of it as “LaTeX style goes for the PDF; CSS style

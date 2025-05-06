@@ -51,7 +51,7 @@
             "command": "tex4ebook",
             "args": [
                 "--lua",
-                "--config", "%WORKSPACE_FOLDER%/customization/xhtml.cfg",
+                "--config", "%WORKSPACE_FOLDER%/customization/xhtml-config.cfg",
                 "--build-dir", "%OUTDIR%",
                 "--output-dir", "%OUTDIR%",
                 "--format", "epub",
