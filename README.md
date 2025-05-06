@@ -83,6 +83,14 @@ My suggestion for typing these is a *compose key* (on Windows, that’s
 can also use LaTeX or Babel graphemes such as ` `` `, `''`, `--`, and `---`.
 
 
+### Limitations
+
+If you use Markdown, you cannot have spaces in your filenames – a [known issue
+with the Markdown package.](https://github.com/Witiko/markdown/issues/568)
+If you choose not to use Markdown, however, you need not worry. You can remove
+`\usepackage[hybrid]{markdown}` from `customization/preamble.tex` as well.
+
+
 ## Contributions
 
 This template can certainly be made better, more user-friendly, and more
@@ -98,5 +106,5 @@ alternative tooling, be my guest!
 
 ---
 
-Go forth, and write righteously and egregiously.  
+Go forth&hairsp;&NoBreak;—&hairsp;write righteously and egregiously.  
 —&hairsp;&NoBreak;Molly
