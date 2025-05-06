@@ -37,8 +37,9 @@ In preparation, you will need:
   **[tex4ebook](https://ctan.org/pkg/tex4ebook)** – see your distribution’s
   instructions for installing packages.
 
-To begin writing, simply copy `Sections/template.tex`, add your new file to the
-list of source files in `book.tex`, and start typing away. …Oh, and you should probably remove the example chapters.
+To begin writing, simply make a copy of `Book/template.tex`, add your new file
+to the list of source files in `book.tex`, and start typing away.
+…Oh, and you should probably remove the example chapters.
 
 The build flow works as such: Whenever you save a chapter, that chapter will
 be automatically built as a PDF, so that you may preview it (semi-)live. To
