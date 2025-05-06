@@ -1,3 +1,5 @@
+* {box-sizing: border-box;}
+
 p {
     text-align: justify;
     hyphens: auto;
@@ -8,12 +10,27 @@ p + p {
 }
 
 
+/* We should test whether `flex` works on slightly older e-readers. */
 .chapter-heading {
+    display: block;
+    display: flex;
+    flex-direction: column;
+    height: min-content;
+    min-height: 33.333%;
     text-align: center;
 }
 
-.chapter-heading > h1:first-child {
-    margin-top: 3em
+.chapter-heading > :first-child {
+    margin-top: auto;
+}
+
+
+div.titlepage {
+    display: block;
+    position: absolute;
+    width: 100%;
+    top: 45%;
+    transform: translateY(-50%);
 }
 
 
