@@ -56,12 +56,22 @@ They can be added and edited primarily in these places:
 
 * **`customization/preamble.tex`** contains all the LaTeX code that will appear
   before the document in every LaTeX file. Here’s where you add packages,
-  change options, and generally write LaTeX code.
+  change options, style the PDF, and generally write LaTeX code.
 * **`customization/xhtml.cfg`** contains the [TeX4Ht configuration](https://www.kodymirus.cz/tex4ht-doc/Configurations.html#configurations2) –
-  i.e. the configuration for EPUB output. Among other things,
-  it lets you style chapter headings, set metadata, and add fonts.
+  i.e. the configuration for EPUB output. Among other things, it lets you
+  style chapter headings, set metadata, and add fonts.
 * **`customization/xhtml.css`** lets you style the EPUB using CSS.
 * Replace **`Images/cover.jpeg`** to set the cover image for the book.
+* Out of the box, this template is set to use American English. To change this,
+  change the line `\usepackage[USenglish]{babel}` in
+  **`customization/preamble.tex`**, and the line `"ltex.language": "en-US",`
+  in **`.vscode/settings.json`**. For example, to switch to British English, change
+  them to `\usepackage[UKenglish]{babel}` and `"ltex.language": "en-GB",`
+  respectively.
+
+Note that the styles of the PDF version and the EPUB version are almost
+entirely separate – think of it as “LaTeX style goes for the PDF; CSS style
+goes for the EPUB.”
 
 The `code/` directory belongs to code inherent to the template – you likely
 won’t have to look in there unless you want to contribute to this repository.

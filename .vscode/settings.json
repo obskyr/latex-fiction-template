@@ -1,5 +1,5 @@
 {
-    // "ltex.language": "en-US",
+    "ltex.language": "en-US",
 
     "ltex.enabled": ["latex", "markdown_latex_combined"],
     "ltex.diagnosticSeverity": "hint",
