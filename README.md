@@ -12,7 +12,7 @@ is required. It sets a reasonable default style, and aims to be customizable.
 As an added bonus, it lets you track your writing via Git, the benefits of
 which I hardly need to extol if you’ve found your way here!
 
-\* Though in reality, it turns out to be surprisingly practical!
+\*&thinsp;&NoBreak;Though in reality, it turns out to be surprisingly practical!
 
 
 ## How to Use
@@ -70,10 +70,11 @@ They can be added and edited primarily in these places:
   change the line `\usepackage[USenglish]{babel}` in
   **`configuration/preamble.tex`**, the line `"ltex.language": "en-US",`
   in **`.vscode/settings.json`**, and the line
-  `\Configure{DocumentLanguage}{en-US}` in `configuration/xhtml-config.cfg`.
-  For example, to switch to British English, change them to
-  `\usepackage[UKenglish]{babel}`, `"ltex.language": "en-GB",`, and
-  `\Configure{DocumentLanguage}{en-GB}` respectively.
+  `\Configure{DocumentLanguage}{en-US}` in
+  **`configuration/xhtml-config.cfg`**. For example, to switch to British
+  English, change them to `\usepackage[UKenglish]{babel}`,
+  `"ltex.language": "en-GB",`, and `\Configure{DocumentLanguage}{en-GB}`
+  respectively.
 
 Note that the styles of the PDF version and the EPUB version are almost
 entirely separate – think of it as “LaTeX style goes for the PDF; CSS style
