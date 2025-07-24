@@ -4,15 +4,16 @@ An utterly deranged\* decision.
 
 So did I.
 
-This repository contains a **template
-for writing fiction in LaTeX** (and Markdown!)**, compiling to both PDF and
-e-reader-ready EPUB formats,** something for which a whole heap of boilerplate
-is required. It sets a reasonable default style, and aims to be customizable.
+This repository contains a **template for writing fiction in LaTeX**
+(and Markdown!)**, compiling to both PDF and e-reader-ready EPUB formats,**
+something for which a whole heap of boilerplate is required.
+It sets a reasonable default style, and aims to be customizable.
 
 As an added bonus, it lets you track your writing via Git, the benefits of
 which I hardly need to extol if you’ve found your way here!
 
-\*&thinsp;&NoBreak;Though in reality, it turns out to be surprisingly practical!
+\*&thinsp;&NoBreak;Though in reality, it turns out to be surprisingly
+practical!
 
 
 ## How to Use
@@ -29,12 +30,12 @@ In preparation, you will need:
   and **[TeX Live](https://www.tug.org/texlive/).** The former is smaller but
   more fussy, while the latter is enormous but has… *everything* included.
 * An installation of **Perl.** You may already have it installed – run `perl
-  -v` to check. If you’re on Windows, I recommend
+  -v` on the command line to check. If you’re on Windows, I recommend
   **[Strawberry Perl](https://strawberryperl.com/).**
 * A rogues’ gallery of LaTeX packages, but you should either already have those
   included with your distribution, or you should be prompted to install them
   in medias res. The one package you may need to install manually is
-  **[tex4ebook](https://ctan.org/pkg/tex4ebook)** – see your distribution’s
+  **[TeX4ebook](https://ctan.org/pkg/tex4ebook)** – see your distribution’s
   instructions for installing packages.
 
 To begin writing, simply make a copy of `Book/template.tex`, add your new file
@@ -48,6 +49,10 @@ build the whole book, open `book.tex` (it matters which file is open!), press
 and run <kbd>Latex Workshop: Build with recipe</kbd>. In the next menu, select
 whether you want to build a PDF or an EPUB. The resulting file will be output
 as `book.pdf` or `book.epub`, respectively.
+
+If I may make a suggestion, keeping your writing ⁠/ plotting notes in an
+[Obsidian](https://obsidian.md/) vault in the same folder works wonders –
+it makes your notes trackable via Git alongside your writing as well.
 
 
 ### Customization
@@ -111,6 +116,18 @@ ease-of-use improvements are all welcome.
 At the moment, it’s made for a build flow centered around VS Code, but that’s
 only because it happens to be what I use – if you want to add support for
 alternative tooling, be my guest!
+
+
+## Acknowledgements
+
+I could not possibly have put this together without the help of Michal Hoftich
+(@michal-h21), the maintainer of TeX4ebook and Make4ht (and honorary maintainer
+of TeX4ht, if I’m to be honest), who tirelessly answers *everybody’s* questions
+about the software on the TeX Stack Exchange, and adds fixes and compatibility
+workarounds upstream in real time as needed. It’s not the most user-friendly
+software in the world (heck, it’s LaTeX – what do you expect), but
+user-friendliness matters less when you have a wonderful man to help you out
+personally.
 
 
 ---
