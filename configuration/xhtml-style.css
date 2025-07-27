@@ -1,23 +1,81 @@
 * {box-sizing: border-box;}
 
+/*
+    h1, h2, h3 {
+        font-weight: normal;
+    }
+*/
+
+h1 {font-size: 2.5em; line-height: 2.5lh;}
+h2 {font-size: 2em; line-height: 2lh;}
+
 p {
     text-align: justify;
+    text-indent: 0; /* Needs to be reset, as 0 isn’t always the default. */
     hyphens: auto;
 }
 
-p + p {
-    margin-top: 0.5mm;
+p.noindent + p.noindent {
+    margin-top: 1em;
+    margin-top: 1lh;
+}
+
+.squared {
+    display: inline-block;
+    border: 1px solid black;
+    width: 1.1em;
+    height: 1.1em;
+    line-height: 1.1em;
+    font-size: 0.9em;
+    text-align: center;
+}
+
+div.footnotes {
+    font-style: inherit;
+}
+
+.symbol {
+    display: inline-block;
+    vertical-align: top;
+    height: 0;
+    text-indent: 0;
+    overflow: visible;
+}
+
+.symbol img {
+    vertical-align: top;
+    height: 1em;
 }
 
 
-/* We should test whether `flex` works on slightly older e-readers. */
 .chapter-heading {
     display: block;
-    display: flex;
-    flex-direction: column;
-    height: min-content;
-    min-height: 33.333%;
+    margin: auto 8.333% 0 8.333%;
     text-align: center;
+}
+
+.chapter-heading.with-number {
+    margin-top: 4.56lh;
+    margin-top: 3.8lh;
+}
+
+.chapter-heading.with-number h2 {
+    font-size: 2.5em;
+    line-height: 2.5lh;
+}
+
+.chapter-heading.with-number h3 {
+    font-size: 1.2em;
+    line-height: 1.2lh;
+}
+
+.chapter-heading.no-number {
+    margin-top: 4.8em;
+    margin-top: 4lh;
+}
+
+.chapter-heading h1, .chapter-heading h2, .chapter-heading h3 {
+    margin: 0;
 }
 
 .chapter-heading > :first-child {
@@ -46,9 +104,120 @@ div.titlepage {
     object-fit: contain;
     margin-left: auto;
     margin-right: auto;
-    max-width: 100vw;
-    max-height: 100vh;
+    max-width: none !important;
+    max-width: 100vw !important;
+    max-height: none !important;
+    max-height: 100vh !important;
     top: 50vh;
     transform: translateY(-50%);
     position: relative;
+}
+
+
+.center p {
+    text-align: center;
+}
+
+
+div.sectionbreak {
+    margin-top: 0;
+    margin-bottom: 0;
+    text-align: center;
+}
+
+
+sup.footnote-mark {
+    vertical-align: text-top;
+    font-size: 60%;
+}
+
+a.footnote-link {
+    text-decoration: none;
+}
+
+
+/* Part of an ugly hack to make `\newepubpage` work. */
+[id^=pagebreak] {
+    display: none;
+}
+
+
+div.title {
+    /*
+        4.2 em is the regular 4.8em (4 lines at an assumed default 1.2×
+        line height) minus enough to align the lines.
+    */
+    margin: 4.2em 8.333% 0 8.333%;
+    margin-top: 3.5lh;
+}
+
+div.title h1 {
+    margin: 0;
+}
+
+div.title, div.title h1, div.title p {
+    text-align: center;
+    text-indent: 0;
+}
+
+.larger {
+    font-size: 1.1em;
+}
+
+.heading .larger {
+    line-height: 1.1lh;
+}
+
+.larger-yet {
+    font-size: 1.2em;
+}
+
+.heading .larger-yet {
+    line-height: 1.2lh;
+}
+
+.half {
+    font-size: 0.5em;
+}
+
+p.from {
+    margin-top: 0;
+}
+
+
+div.footnotes {
+    margin: 0;
+    border-top: none;
+    border-bottom: none;
+}
+
+/*
+    ::before may not work that widely across e-readers at the time of writing,
+    but the alternative is to `\Configure{BODY}` with a copied and edited
+    configuration from the TeX4ht source (search for `\<inline footnote\><<<`),
+    and that’s just a lot of code for little gain.
+    Not doin’ that at the moment.
+*/
+div.footnotes::before {
+    content: '';
+    display: block;
+    width: 33.333%;
+    margin-top: 1.1em;
+    margin-top: calc(1lh - 0.1em);
+    margin-bottom: 1.2em;
+    margin-bottom: 1lh;
+    border-top: 0.1em solid currentColor;
+}
+
+
+.footnote p.noindent {
+    /*
+        The first line of the first paragraph in a footnote should be indented
+        *more* than the first line of subsequent paragraphs.
+    */
+    text-indent: 3em;
+}
+
+.footnote p.indent {
+    text-indent: 1.5em;
 }

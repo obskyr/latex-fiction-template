@@ -1,0 +1,36 @@
+% Packages to load at the start of the preamble.
+% Not every package needs to be in here. Some may make more sense to import
+% in conjunction with other code.
+
+% LTEX: enabled=false
+
+
+\usepackage{anyfontsize}
+% In addition to allowing the use of the `\href` macro, `hyperref`
+% also sets useful PDF metadata.
+\usepackage[hyperfootnotes=false]{hyperref}
+% Prevents breaking words at the end of a page. In principle, I’d be fine
+% with breaking a word across the same spread, but I don’t know of a
+% way to make that happen.
+\usepackage[hyphenation]{impnattypo}
+\usepackage{needspace}
+\usepackage[asterism]{sectionbreak}
+\usepackage{subfiles}
+
+% Change this to change the language settings for your book.
+\usepackage[USenglish]{babel}
+
+% Footnotes should, in most cases, be handled differently between the
+% PDF version and the textual e-book version.
+\iftexforht{
+    \RenewDocumentCommand{\thefootnote}{}{\roman{footnote}}
+    % Without this, TeX4ht will insert hard-coded size `<span>`s.
+    % We handle the size in CSS instead.
+    \setkomafont{footnote}{\normalsize}
+    % It’s actually meaningful that this second one is set to a non-zero
+    % length. It makes TeX4ht add the `indent` class to following paragraphs
+    % rather than the `noindent` class.
+    \deffootnote{0em}{2em}{\thefootnotemark.}
+}{
+    \usepackage[perpage,symbol*]{footmisc}
+}

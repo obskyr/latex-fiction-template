@@ -4,24 +4,28 @@
 % should be set surrounded by hair spaces. You can modify this file to
 % change that.
 
+% LTEX: enabled=false
+
 
 % Ensure that hair spaces work.
+% If you want it thinner, just replace the whole body of the
+% `\newunicodechar` call with `\hspace{0.5pt}`.
 \iftexforht {} {
     \newunicodechar { } {%
         \iffontchar\font `^^^^200a {%
             ^^^^200a%
         }\else{%
-            durky\hspace{1pt}%
+            \hspace{0.5pt}%
         }\fi%
     }
 }
 
 
 % Ensure that en spaces work.
-\iftexforht {
-    \renewcommand {\enspace} {^^^^2002}
-} {
-    \newunicodechar { } {%
+\iftexforht{
+    \RenewDocumentCommand{\enspace}{}{^^^^2002}
+}{
+    \newunicodechar{ }{%
         \iffontchar\font `^^^^2002 {%
             ^^^^2002%
         }\else{%
@@ -31,9 +35,53 @@
 }
 
 
+% Ensure that horizontal bars work.
+\newunicodechar{―}{%
+    \iftexforht {%
+        ^^^^2015%
+    }{%
+        \ifvmode{}\else{\unskip \space}\fi%
+        \iffontchar\font `^^^^2015 {%
+            ^^^^2015%
+        }\else{%
+            % ^^^^2014% Em dash (for a font that has a wide enough em dash).
+            \iffontchar\font `^^^^2e3a{%
+                ^^^^2e3a% 2-em dash (for one that doesn’t).
+            }\else{%
+                % … Or a scaled-up em dash if the font doesn’t have a 2-em dash.
+                % You’ll probably want to tweak the scale – the first
+                % argument here – if that is the case.
+                \scalebox{2.5}[1]{^^^^2014}%
+            }%
+        }\fi%
+    }%
+     \ignorespaces%
+}
+
+
 % Prevent breaking before en dashes.
-\newunicodechar{–}{\unskip~--\space\ignorespaces}
+\newunicodechar{–}{%
+    \IfNextSpace{%
+        \unskip ^^^^2013\space\ignorespaces%
+    }{%
+        \unskip^^^^2060 ^^^^2013 \ignorespaces%
+    }%
+}
 
 
 % Prevent breaking before em dashes (and add in hair spaces).
-\newunicodechar{—}{\ifvmode{}\else{\unskip }\fi^^^^2060—\IfNextSpace{\enspace\ignorespaces}{ }}
+\newunicodechar{—}{%
+    \mbox{%
+        \ifvmode{}\else{\unskip ^^^^2060}\fi%
+        \iftexforht%
+            {^^^^2014}%
+            % If the em dash in your PDF font is too short for your
+            % liking, comment the line below and uncomment the line
+            % below that.
+            {^^^^2014}%
+            % {\scalebox{1.25}[1]{^^^^2014}}%
+    }%
+    \IfNextSpace%
+        {\enspace\ignorespaces}%
+        { }%
+}

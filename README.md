@@ -4,9 +4,10 @@ An utterly deranged\* decision.
 
 So did I.
 
-This repository contains a **template for writing fiction in LaTeX**
-(and Markdown!)**, compiling to both PDF and e-reader-ready EPUB formats,**
-something for which a whole heap of boilerplate is required.
+This repository contains a **template for writing fiction in LaTeX** – not just
+novels, but anthologies; short stories; anything you might want –
+**compiling to both PDF and e-reader-ready EPUB 3 formats,** something for which
+weeks of research and a whole heap of boilerplate would normally be required.
 It sets a reasonable default style, and aims to be customizable.
 
 As an added bonus, it lets you track your writing via Git, the benefits of
@@ -41,6 +42,9 @@ In preparation, you will need:
 To begin writing, simply make a copy of `Book/template.tex`, add your new file
 to the list of source files in `book.tex`, and start typing away.
 …Oh, and you should probably remove the example chapters.
+By default, this repository is set up for long-form fiction split into multiple
+files, but if you want to write something shorter, there’s nothing stopping you
+from typing directly into (and renaming!) `book.tex`.
 
 The build flow works as such: Whenever you save a chapter, that chapter will
 be automatically built as a PDF, so that you may preview it (semi-)live. To

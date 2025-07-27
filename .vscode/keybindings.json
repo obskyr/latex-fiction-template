@@ -10,7 +10,7 @@
     {
         "key": "ctrl+shift+I",
         "command": "editor.action.insertSnippet",
-        "when": "editorTextFocus && editorLangId == latex",  // chained clause
+        "when": "editorTextFocus && editorLangId == latex",
         "args": {
             "snippet": "\\textit{${TM_SELECTED_TEXT}}$0"
         }

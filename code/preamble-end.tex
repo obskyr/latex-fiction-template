@@ -2,21 +2,65 @@
 % for the brass-tacks template to function. It will be the last thing executed
 % in the preamble, after user code in `configuration/preamble.tex`.
 
+% LTEX: enabled=false
+
+
 % === Hacks and Workarounds ===
 
-% This works around an issue when using the Markdown package, which makes it
-% so that filenames can’t contain spaces.
-% https://github.com/Witiko/markdown/issues/568
-\ifdefined\markdownSetup
-    \ifdefined\StrDel
-    \else
-        \usepackage{xstring}
-    \fi
+% This lets us have `\chapter*` add to the table of contents in the PDF
+% version. (This is handled separately for TeX4ht.)
+\makeatletter
+\NewCommandCopy{\chapter@original}{\chapter}
+\RenewDocumentCommand{\chapter}{sm}{%
+    \IfBooleanTF{#1}{%
+        \chapter@original*{#2}%
+        \markboth{#2}{#2}%
+        % We have TeX4ht set up to add `\chapter*`s to the table of contents
+        % without using `\addcontentsline`. Using it would create a duplicate
+        % entry in the table of contents.
+        \iftexforht{}{\addcontentsline{toc}{chapter}{#2}}%
+    }{%
+        \chapter@original{#2}%
+    }%
+}
 
-    \StrDel{\jobname}{"}[\jobnameSansQuotes]
-    \typeout{“\jobnameSansQuotes” wow mama}
-    \markdownSetup{
-        inputTempFileName = \jobnameSansQuotes.markdown.in,
-        cacheDir = \markdownOptionOutputDir / _markdown_\jobnameSansQuotes
+\NewCommandCopy{\tableofcontents@original}{\tableofcontents}
+\RenewDocumentCommand{\tableofcontents}{}{%
+    \iftexforht{%
+        \tableofcontents@original%
+    }{
+        % This is required because `\tableofcontents` internally calls
+        % `\chapter*`, meaning it’ll add itself to the table of contents
+        % if we use our redefined version.
+        \let\chapter\chapter@original%
+        \tableofcontents@original%
     }
+}
+\makeatother
+
+
+% === Setup that depends on title, etc. ===
+
+\makeatletter
+\AtEndPreamble{%
+    \hypersetup{ 
+        urlbordercolor=0.208 0.761 1,
+        pdftitle={\@title},
+        pdfauthor={\@author},
+        pdfborder=4 4 1,
+        pdfpagemode=UseOutlines
+    }
+}
+\makeatother
+
+
+% === Tweaks ===
+
+% Make section breaks unindent the following paragraph.
+
+% This one won’t work with TeX4ht, but we’re fixing that elsewhere.
+\ifdefined\sectionbreak
+    \NoIndentAfterCmd{\sectionbreak}
 \fi
+
+\NoIndentAfterEnv{figure}

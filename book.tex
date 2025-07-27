@@ -1,23 +1,30 @@
 \documentclass{scrbook}
 
-\input{code/preamble-start}
-\input{configuration/preamble}
-\usepackage{subfiles}
-\input{code/preamble-end}
+\input{code/preamble}
 
+% Edit these!
+\title{The Time Machine}
+\author{H. G. Wells}
+\date{Sometime 1895}
 
 \begin{document}
 
-\iftexforht {%
+% LTEX: enabled=false
+\iftexforht{%
     \IfFileExists{./Images/cover.jpeg}{%
         \coverimage[natwidth=\paperwidth,natheight=\paperheight,alt={Cover}]{./Images/cover.jpeg}%
     }{}%
 }{}
+% LTEX: enabled=true
 
 
 % Add your source files here.
 
-\subfile{Book/01}
+\subfile{Book/00.0.1 - Colophon}
+\subfile{Book/00.0.2 - Title}
+\subfile{Book/00.0.3 - Table of Contents}
+\subfile{Book/00.1 - Introduction}
+\subfile{Book/01 - The Machine}
 
 
 \end{document}

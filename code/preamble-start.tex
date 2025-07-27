@@ -2,13 +2,18 @@
 % for the brass-tacks template to function. It will be the first thing executed
 % in the preamble, before user code in `configuration/preamble.tex`.
 
+% LTEX: enabled=false
+
+
+\usepackage{datetime2}
 \usepackage{ifnextok}
 \usepackage{newunicodechar}
+\usepackage{noindentafter}
 
 
 % == Utility Commands ==
 
-% \iftexforht {[if true…]} {[if false…]}:
+% \iftexforht{[if true…]}{[if false…]}:
 % Detect whether you’re running in `tex4ebook` (or similar) or not.
 % Some typographical decisions may need to differ between a PDF and an EPUB
 % edition. For example, to insert HTML, you may do:
@@ -22,9 +27,53 @@
 \makeatother
 
 
-% A shim so that `\epubpage` can be used (without doing anything, but also
+% A shim so that `\newepubpage` can be used (without doing anything, but also
 % not causing any errors) even when compiling a PDF.
-\providecommand\epubpage{}
+\ProvideDocumentCommand{\newepubpage}{}{}
 
+
+% Shims for the below.
+\ProvideDocumentCommand{\PauseCutAt}{m}{}
+\ProvideDocumentCommand{\ContCutAt}{m}{}
+
+% Allows starting a new chapter without TeX4ht cutting the file there.
+% This is useful if you want to start a chapter immediately at the start
+% of the document – without this, TeX4ht will produce an empty page before.
+\NewDocumentCommand{\chapterwithoutcut}{sm}{%
+    \IfBooleanTF{#1}{%
+        \PauseCutAt{likechapter}%
+        \chapter*{#2}%
+        \ContCutAt{likechapter}%
+    }{%
+        \PauseCutAt{chapter}%
+        \chapter{#2}%
+        \ContCutAt{chapter}%
+    }%
+}
+
+
+% === For TeX4ebook ===
+
+% Set publication date.
+\NewDocumentCommand{\publicationdate}{m}{\DTMsavedate{publication}{#1}}
+
+% TeX4ebook uses the `\year`, `\month`, and `\day` variables to set the
+% publication date. In order not to mess with these during the preamble,
+% we set them at the end.
+% Note that this *will* still mess up `year`, `\month`, `\day`, and `\today`
+% in the *document,* but I can’t seem to find a hook that lets me recall it
+% that works with TeX4ht. (`AtBeginDocument` errors out, and `AfterEndPreamble`
+% recalls it before it’s used to set the date in the OPF file.)
+\AtEndPreamble{
+    \DTMifsaveddate{publication}{%
+        \DTMsavenoparsedate{today}{\the\year}{\the\month}{\the\day}{-1}
+        \year=\DTMfetchyear{publication}
+        \month=\DTMfetchmonth{publication}
+        \day=\DTMfetchday{publication}
+    }{}
+}
+
+
+% === Typography ===
 
 \input{code/typography}

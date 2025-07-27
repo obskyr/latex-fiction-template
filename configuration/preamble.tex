@@ -1,94 +1,16 @@
-% This is a preamble shared between all files. Add or remove packages you need
-% here as you see fit; define new commands… Do your LaTeX setup here!
+% This is a preamble shared between all files. Its code will be run before
+% your document starts. For your convenience, it’s split up into shorter
+% sub-files.
 
-% === Packages ===
-
-\usepackage[hybrid]{markdown}
-
-% Change this to change the language settings for your book.
-\usepackage[USenglish]{babel}
+% LTEX: enabled=false
 
 
-% == Text Commands ==
-
-% An example dialogue command.
-
-\newcommand{\s}[1]{\ifvmode{}\else{\par}\fi—#1}
-
-
-% == Settings ==
-
-% You will have to duplicate this information in `xhtml.cfg` for the metadata
-% to show up properly in a resulting EPUB file.
-\title{The Time Machine}
-\author{H. G. Wells}
-\date{1895}
+\input{configuration/packages}
+\input{configuration/fonts}
+\input{configuration/style}
+\input{configuration/text-commands}
 
 
-% Book format
-\KOMAoptions{
-    usegeometry,
-    fontsize=10pt
-}
-\usepackage[
-    % Paper size
-    paperwidth=110mm,
-    paperheight=178mm,
-    %
-    % Margins
-    top=1.8cm,
-    left=1cm,
-    right=1cm,
-    bottom=2.25cm,
-    %
-    % What binding correction makes sense depends on your paper format
-    % and your *number of pages,* since more of the page will be obscured
-    % in a thick, glue-bound book.
-    % https://tex.stackexchange.com/a/38700/392788
-    bindingoffset=5mm
-]{geometry}
-
-
-% Header and footer styling
-\usepackage[automark]{scrlayer-scrpage}
-\clearpairofpagestyles
-\cfoot*{\pagemark}
-\renewcommand{\headfont}{\scshape}
-\chead{\headmark}
-\renewcommand*\chaptermarkformat{\chapterformat : }
-
-
-% Chapter heading styling
-\addtokomafont{disposition}{\rmfamily}
-
-\KOMAoptions{
-    headings=twolinechapter
-}
-\usepackage{relsize}
-\renewcommand{\chapterlineswithprefixformat}[3]{%
-    {\centering%
-        \IfArgIsEmpty{#2}{%
-            #3%
-        }{
-            \ifdef{\liningnums}{%
-                \liningnums{#2}%
-            }{%
-                #2%
-            }%
-            \relsize{-1.2}{#3}%
-        }%
-    }%
-}
-
-
-% Typeface – you can use a TeX package, as shown below, or uncomment the line
-% below that and use a local font on your computer. Note that this will only
-% affect the fonts used in the PDF version – for the textual e-book version,
-% you’ll have to modify `xhtml.cfg`.
-\usepackage[no-math]{fontspec}
-\usepackage{ebgaramond}
-% \setmainfont{Lora}
-
-% Note that this will have to be set separately in `xhtml.css` for the EPUB
-% version. In general, consider PDF style and EPUB style separate!
-\parskip=0.5mm
+% Don’t be afraid to add some preamble code – any LaTeX setup, really –
+% at the end of this file, should you need it and it doesn’t fit neatly
+% into the above files!

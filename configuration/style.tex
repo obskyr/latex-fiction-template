@@ -1,0 +1,128 @@
+% Modifications to the style of the document.
+
+% LTEX: enabled=false
+
+
+% === Book format ===
+
+\KOMAoptions{
+    twoside=false % Set this to `true` if it is to be printed as a book.
+}
+
+% For some inexplicable reason, KOMA-Script’s `fontsize` option breaks TeX4ht
+% if using a non-integer font size, which is why we gate that option behind
+% an `\iftexforht` call.
+\iftexforht{}{
+    \KOMAoption{fontsize}{10pt}
+    \recalctypearea
+}
+
+\usepackage[
+    % Paper size
+    paperwidth=110mm,
+    paperheight=178mm,
+    %
+    % Margins
+    top=1.8cm,
+    left=1cm,
+    right=1cm,
+    bottom=2.25cm
+    %
+    % What binding correction makes sense depends on your paper format
+    % and your *number of pages,* since more of the page will be obscured
+    % in a thick, glue-bound book.
+    % https://tex.stackexchange.com/a/38700/392788
+    % (Of course, with `twoside=false`, you need no binding
+    % correction at all.
+    % bindingoffset=5mm
+]{geometry}
+
+
+% === Header and footer styling ===
+
+\usepackage[automark]{scrlayer-scrpage}
+\pagestyle{scrheadings}
+\clearpairofpagestyles
+
+\cfoot*{\pagemark}
+
+\RenewDocumentCommand{\headfont}{}{\scshape}
+\chead{\headmark}
+\RenewDocumentCommand{\chaptermarkformat}{}{\chapterformat : }
+
+\setkomafont{pagenumber}{\normalfont}
+
+
+% === Headings ===
+
+\setkomafont{disposition}{\rmfamily}
+
+\KOMAoptions{
+    headings=twolinechapter
+}
+
+\usepackage{relsize}
+
+\RenewDocumentCommand{\chapterlineswithprefixformat}{mmm}{%
+    {%
+        \centering%
+        \IfArgIsEmpty{#2}{%
+            #3%
+        }{
+            \ifdef{\liningnums}{%
+                \liningnums{#2}%
+            }{%
+                #2%
+            }%
+            \relsize{-1.2}{#3}%
+        }%
+    }%
+}
+
+
+% === Miscellaneous text styling ===
+
+% In case you’re using a font that doesn’t have superscript asterisks
+% and daggers, uncomment the following.
+
+% \makeatletter
+% \RenewDocumentCommand{\@makefnmark}{}{%
+%     \iftexforht{%
+%         \@thefnmark%
+%     }{%
+%         \textsuperscript{\@thefnmark}%
+%     }%
+% }
+% \makeatother
+
+
+% Note that this will have to be set separately in `xhtml.css` for the EPUB
+% version. In general, consider PDF style and EPUB style separate!
+\parskip=0pt
+
+
+% Don’t break footnotes up over multiple pages, please.
+\interfootnotelinepenalty=10000
+
+
+% === Table of contents ===
+
+\makeatletter
+\let\addchaptertocentry@original\addchaptertocentry
+\RenewDocumentCommand{\addchaptertocentry}{mm}{%
+    \IfArgIsEmpty{#1}{%
+        \addchaptertocentry@original{#1}{#2}%
+    }{%
+        \addchaptertocentry@original{}{\chapapp~#1: #2}%
+    }%
+}
+\makeatother
+
+\DeclareTOCStyleEntry[
+    linefill=\dotfill
+]{tocline}{chapter}
+
+
+% === Custom Hyphenation ===
+
+% \hyphenation{bilge-water}

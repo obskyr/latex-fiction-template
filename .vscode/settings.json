@@ -2,7 +2,6 @@
     "ltex.language": "en-US",
 
     "ltex.enabled": ["latex", "markdown_latex_combined"],
-    "ltex.diagnosticSeverity": "hint",
 
     "files.associations": {
         "*.cfg": "latex"
@@ -23,9 +22,9 @@
             ]
         },
         {
-            "name": "Make EPUB",
+            "name": "Make EPUB 3",
             "tools": [
-                "tex4ebook",
+                "tex4ebook (EPUB 3)",
                 "Move EPUB"
             ]
         }
@@ -47,14 +46,14 @@
             }
         },
         {
-            "name": "tex4ebook",
+            "name": "tex4ebook (EPUB 3)",
             "command": "tex4ebook",
             "args": [
                 "--lua",
                 "--config", "%WORKSPACE_FOLDER%/configuration/xhtml-config.cfg",
                 "--build-dir", "%OUTDIR%",
                 "--output-dir", "%OUTDIR%",
-                "--format", "epub",
+                "--format", "epub3",
                 "%DOC%"
             ],
             "env": {
